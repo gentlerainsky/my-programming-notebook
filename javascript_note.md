@@ -12,7 +12,7 @@
 }()
 ```
 
-or you may invoke function by this way too.
+or you can invoke function by this way too.
 
 ```javascript
 (function () {
