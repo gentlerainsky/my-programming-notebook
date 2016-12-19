@@ -51,6 +51,16 @@ A note on piping: Note that we can read these three lines of code as the followi
 This is essentially equivalent to going through each row and adding up the boys
 and girls counts for that year and recording that value in a new column called total.
 
+**structure of data**
+- str(DATA_VARIABLE_NAME)
+
+ taking a quick peek at your data frame, and viewing its dimensions and data types is str, which stands for structure.
+
+**Turn numerical data to categorical**
+- factor(COLUMN_NAME)
+
+the data frame month is stored as a numerical variable (numbers 1 - 12). Therefore we can force R to treat this variable as categorical, what R calls a factor, variable with factor(month). 
+ 
 **plot some graph using ggplot**
 
 ```R
@@ -69,8 +79,30 @@ Finally, we use another layer, separated by a + to specify the geometric object 
 
 - geom_point - scatterplot
 - geom_line - line graph
+- geom_histogram() - histogram
 
 you can use both plot styles by adding together both function ex. geom_point() + geom_line()
 
 **view function documentation**
 - ?FUNCTION_NAME eg. ?ggplot
+
+**Package: dplyr**
+
+**filter**
+- rdu_flights <- nycflights %>% filter(dest == "RDU")
+
+filter on multiple criteria
+
+- sfo_feb_flights <- nycflights %>% filter(dest == "SFO", month == 2)
+
+**numerical summaries**
+- rdu_flights %>% summarise(mean_dd = mean(dep_delay), sd_dd = sd(dep_delay), n = n())
+
+list of summary statistics available `mean`, `median`, `sd`, `var`, `IQR`, `range`, `min`, `max`
+
+**group data before calculation**
+- rdu_flights %>% group_by(origin) %>% summarise(mean_dd = mean(dep_delay), sd_dd = sd(dep_delay), n = n())
+
+**arrange the output**
+- nycflights %>% group_by(month) %>% summarise(mean_dd = mean(dep_delay)) %>% arrange(desc(mean_dd))
+
